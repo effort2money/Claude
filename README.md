@@ -43,6 +43,43 @@
 - `CLAUDE_CODE_OAUTH_TOKEN` secret（必需）
 - `ANTHROPIC_BASE_URL` secret（可选）
 
+## Docker 部署
+
+本项目支持使用 Docker 进行本地开发和部署。详细说明请参考 [Docker 部署指南](docs/docker-deployment.md)。
+
+### 快速开始
+
+1. 配置环境变量：
+```bash
+cp .env.example .env
+# 编辑 .env 文件，填写必要的配置
+```
+
+2. 构建 Docker 镜像：
+```bash
+# Linux/Mac
+./scripts/docker-build.sh
+
+# Windows
+.\scripts\docker-build.ps1
+```
+
+3. 启动容器：
+```bash
+# Linux/Mac
+./scripts/docker-run.sh
+
+# Windows
+.\scripts\docker-run.ps1
+```
+
+### 部署模式
+
+- **开发环境模式**：用于本地开发和测试
+- **GitHub Runner 模式**：运行自托管的 GitHub Actions Runner
+
+更多详细信息，请查看 [Docker 部署文档](docs/docker-deployment.md)。
+
 ## 相关链接
 
 - [Claude Code Action](https://github.com/anthropics/claude-code-action)
