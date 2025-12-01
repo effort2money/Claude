@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  claude-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: claude-code-dev
+    volumes:
+      - .:/workspace
+      - ~/.gitconfig:/root/.gitconfig:ro
+    environment:
+      - CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN}
+      - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    command: /bin/bash
+
+  # 可选：GitHub Actions Runner (自托管)
+  github-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    container_name: claude-github-runner
+    environment:
+      - RUNNER_NAME=claude-docker-runner
+      - RUNNER_WORKDIR=/workspace
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - REPO_URL=${REPO_URL}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./runner-data:/workspace
+    restart: unless-stopped
+    profiles:
+      - runner
