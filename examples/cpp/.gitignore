@@ -1,0 +1,15 @@
+# 编译输出文件
+hello
+hello.exe
+*.o
+*.obj
+
+# IDE 文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 调试文件
+*.dSYM/
